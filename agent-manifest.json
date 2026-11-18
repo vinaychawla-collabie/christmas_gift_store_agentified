@@ -1,0 +1,83 @@
+{
+  "brand": "North Pole Gift Co. Assistant",
+  "networks": [
+    {
+      "name": "north_pole_gift_co",
+      "front_man": "north_pole_gift_assistant",
+      "hocon": "./north_pole_gift_co.network.json",
+      "description": "I can help you find Christmas gifts, fill your cart, check Christmas delivery dates and place an order you confirm.",
+      "tags": [
+        "agentified-website",
+        "christmas",
+        "gifts",
+        "retail"
+      ],
+      "sample_queries": [
+        "What gifts do you have for a 7-year-old for under $30?",
+        "Add two Gingerbread House Kits with gift wrap to my cart.",
+        "If I order today with standard shipping, will it arrive by Christmas?",
+        "Order one Cozy Plaid Blanket for store pickup. I'm Ann Lee, ann@example.com.",
+        "Can I pay with a gift card?"
+      ]
+    }
+  ],
+  "llm_router": {
+    "base_url": "https://api.otari.ai/api/v1",
+    "mock": false,
+    "byok_router": "https://api.otari.ai/api/v1"
+  },
+  "allowed_peers": [],
+  "peer_policy": {
+    "mode": "closed",
+    "deny_origins": [],
+    "note": "Local agents and page-local actions only."
+  },
+  "agent_mcp": {
+    "protocol": "nsdeploy-agent-mcp/v1",
+    "network": "north_pole_gift_co",
+    "front_man": "north_pole_gift_assistant",
+    "available": false,
+    "reason": "This is a static bundle; a public MCP facade requires an application host."
+  },
+  "theme": {
+    "primary": "#b3001b"
+  },
+  "linking": {
+    "protocol": "nsdeploy-link/v1",
+    "exports": [
+      {
+        "network": "north_pole_gift_co",
+        "front_man": "north_pole_gift_assistant",
+        "aliases": [
+          "north_pole_gift_co",
+          "north_pole_gift_assistant"
+        ],
+        "url": "north_pole_gift_co"
+      }
+    ],
+    "imports": [],
+    "link_updates": {
+      "mode": "browser-local"
+    }
+  },
+  "deployment": {
+    "mode": "static",
+    "self_contained_runtime": true,
+    "browser_mock": false,
+    "direct_byok": true,
+    "direct_mcp_requires_cors": true,
+    "public_mcp_facade": false
+  },
+  "actions": {
+    "version": 1,
+    "module": "./site-actions.js",
+    "bridge": "./bridge/action-bridge.html",
+    "agentTools": [
+      "get_store_state",
+      "add_to_cart",
+      "set_cart_quantities",
+      "set_coupon",
+      "place_order"
+    ]
+  }
+}

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>North Pole Gift Co. | Christmas Gifts</title>
+  <meta name="description" content="Christmas gifts for kids, teens, adults, families and pet lovers, with gift wrap, coupons and Christmas delivery dates.">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="script.js"></script>
+  <script type="module" src="site.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand"><span aria-hidden="true">🎅</span> North Pole Gift Co.</div>
+    <nav aria-label="Main">
+      <a href="#shop">Shop</a>
+      <a href="#cart">Cart (<span id="cart-count">0</span>)</a>
+      <a href="#delivery">Christmas delivery</a>
+      <a href="#orders">Your orders</a>
+      <a href="#assistant">Ask the assistant</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Merry Christmas gifting, minus the stress</h1>
+    <p id="hero-note">Gift wrap on any item. Free standard shipping on bigger orders.</p>
+  </section>
+
+  <main>
+    <section id="shop" aria-labelledby="shop-title">
+      <h2 id="shop-title">Shop gifts</h2>
+      <form id="filters" class="filters" role="search">
+        <label>Search <input id="f-q" type="search" placeholder="e.g. reindeer"></label>
+        <label>Category <select id="f-category"><option value="">All</option></select></label>
+        <label>For <select id="f-recipient"><option value="">Anyone</option></select></label>
+        <label>Max price ($) <input id="f-max" type="number" min="0" step="1"></label>
+        <label class="check"><input id="f-stock" type="checkbox"> In stock only</label>
+        <button type="submit">Apply</button>
+        <button type="button" id="f-reset" class="secondary">Reset</button>
+      </form>
+      <p id="product-status" class="muted" aria-live="polite"></p>
+      <div id="product-grid" class="grid"></div>
+    </section>
+
+    <div class="two-col">
+      <section id="cart" class="panel" aria-labelledby="cart-title">
+        <h2 id="cart-title">Your cart</h2>
+        <p id="cart-message" role="status" aria-live="polite"></p>
+        <div id="cart-lines"></div>
+        <div id="cart-totals" class="totals"></div>
+        <form id="coupon-form" class="row">
+          <label>Coupon code <input id="coupon-code" maxlength="20" autocomplete="off"></label>
+          <button type="submit">Apply</button>
+          <button type="button" id="coupon-remove" class="secondary" hidden>Remove coupon</button>
+        </form>
+        <p id="coupon-message" role="status" aria-live="polite"></p>
+      </section>
+
+      <section id="checkout" class="panel" aria-labelledby="checkout-title">
+        <h2 id="checkout-title">Checkout</h2>
+        <form id="checkout-form" class="checkout" novalidate>
+          <label>Full name <input id="c-name" maxlength="80" autocomplete="name"></label>
+          <label>Email <input id="c-email" type="email" maxlength="120" autocomplete="email"></label>
+          <label>Delivery <select id="c-ship"></select></label>
+          <label id="c-address-wrap">Shipping address <textarea id="c-address" rows="2" maxlength="200" autocomplete="street-address"></textarea></label>
+          <label>Gift message (optional) <input id="c-gift" maxlength="200"></label>
+          <p class="muted small">This is a demo store: no payment is taken and nothing ships.</p>
+          <button type="submit" id="place-order">Place order</button>
+        </form>
+        <p id="checkout-message" role="status" aria-live="polite"></p>
+      </section>
+    </div>
+
+    <section id="assistant" class="assistant" aria-labelledby="assistant-heading">
+      <h2 id="assistant-heading">Ask North Pole Gift Co.</h2>
+      <p>Tell the assistant who you are shopping for and your budget: it can suggest gifts, fill your cart, check Christmas delivery dates and place an order you confirm.</p>
+      <p class="assistant-note">Your messages and this page's data go to the LLM provider you choose in the settings below. You confirm anything that cannot be undone before it happens.</p>
+      <p id="assistant-status" role="status">Connecting the assistant… If this message stays, the assistant could not load. You can still use the page directly.</p>
+      <div id="agent-app">
+        <div data-ns-slot="header"></div>
+        <div class="assistant-panels">
+          <div data-ns-slot="chat"></div>
+          <div data-ns-slot="agents"></div>
+        </div>
+        <div data-ns-slot="settings"></div>
+      </div>
+    </section>
+
+    <section id="delivery" class="panel" aria-labelledby="delivery-title">
+      <h2 id="delivery-title">Christmas delivery</h2>
+      <p>Today is <strong id="today-label"></strong>.</p>
+      <table class="table">
+        <thead><tr><th>Method</th><th>Cost</th><th>Speed</th><th>Order by</th><th>Arrives by Christmas?</th></tr></thead>
+        <tbody id="ship-table"></tbody>
+      </table>
+    </section>
+
+    <section id="policies" class="panel" aria-labelledby="policies-title">
+      <h2 id="policies-title">Store policies</h2>
+      <dl id="policy-list" class="policies"></dl>
+    </section>
+
+    <section id="orders" class="panel" aria-labelledby="orders-title">
+      <h2 id="orders-title">Your orders</h2>
+      <p class="muted small">Orders placed in this browser.</p>
+      <p id="orders-empty">No orders yet.</p>
+      <ul id="orders-list" class="orders"></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">North Pole Gift Co. · Demo store · No real payments are processed and nothing ships.</footer>
+</body>
+</html>

@@ -1,0 +1,146 @@
+:root {
+  --red: #b3001b; --green: #146b3a; --gold: #d4a017; --bg: #fffaf3; --ink: #1f2933;
+  --card: #ffffff; --muted: #5b6774; --line: #e5ded2;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--ink); }
+a { color: var(--green); }
+.site-header { display: flex; align-items: center; gap: 1rem; padding: .75rem 1.25rem; background: var(--red); color: #fff; position: sticky; top: 0; z-index: 5; flex-wrap: wrap; }
+.site-header a { color: #fff; margin-right: 1rem; text-decoration: none; font-weight: 600; }
+.brand { font-weight: 800; font-size: 1.2rem; margin-right: auto; }
+.hero { background: linear-gradient(135deg, var(--green), #0c4426); color: #fff; padding: 2rem 1.25rem; text-align: center; }
+.hero h1 { margin: 0 0 .5rem; }
+main { max-width: 1100px; margin: 0 auto; padding: 1rem 1.25rem 3rem; }
+button { background: var(--green); color: #fff; border: 0; border-radius: 8px; padding: .55rem .9rem; font-weight: 600; cursor: pointer; }
+button.secondary { background: #e9e4da; color: var(--ink); }
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+button:disabled { opacity: .5; cursor: not-allowed; }
+input, select, textarea { font: inherit; padding: .45rem; border: 1px solid var(--line); border-radius: 6px; width: 100%; }
+label { display: flex; flex-direction: column; gap: .25rem; font-size: .9rem; font-weight: 600; }
+label.check { flex-direction: row; align-items: center; gap: .4rem; }
+label.check input { width: auto; }
+.filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: .75rem; align-items: end; margin-bottom: 1rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1rem; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 1rem; display: flex; flex-direction: column; gap: .4rem; }
+.card .emoji { font-size: 2.5rem; }
+.card h3 { margin: 0; font-size: 1.05rem; }
+.price { font-weight: 800; color: var(--red); }
+.badge { display: inline-block; font-size: .75rem; background: #eef6f0; color: var(--green); padding: .1rem .45rem; border-radius: 999px; margin-right: .25rem; }
+.badge.out { background: #fbeaea; color: var(--red); }
+.muted { color: var(--muted); }
+.small { font-size: .8rem; }
+.panel { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 1rem 1.25rem; margin-top: 2rem; }
+.two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 0 1.5rem; }
+.row { display: flex; gap: .75rem; align-items: end; flex-wrap: wrap; }
+.row label { flex: 1 1 160px; }
+.table { width: 100%; border-collapse: collapse; }
+.table th, .table td { border-bottom: 1px solid var(--line); padding: .5rem; text-align: left; }
+.line { display: grid; grid-template-columns: 2rem 1fr auto; gap: .5rem; align-items: center; border-bottom: 1px dashed var(--line); padding: .4rem 0; }
+.line input[type=number] { width: 4.5rem; }
+.line-controls { display: flex; gap: .5rem; align-items: center; font-size: .85rem; flex-wrap: wrap; }
+.totals div { display: flex; justify-content: space-between; }
+.totals .grand { font-weight: 800; font-size: 1.1rem; border-top: 1px solid var(--line); padding-top: .3rem; }
+.checkout { display: flex; flex-direction: column; gap: .6rem; }
+.policies dt { font-weight: 700; margin-top: .5rem; }
+.policies dd { margin: 0; }
+.orders li { margin-bottom: .5rem; }
+.error { color: var(--red); font-weight: 600; }
+.success { color: var(--green); font-weight: 600; }
+.site-footer { text-align: center; padding: 1.5rem; color: var(--muted); }
+
+/* ---------- Assistant (from the agentify-website skill's templates/assistant.css) ---------- */
+/* Assistant layout. Append to the site's stylesheet and set the colors to the site's palette. */
+.assistant { margin-top: 48px; }
+
+/* The runtime reads these variables for its chat, settings and agent panels.
+   The chat background below also uses --ns-bg. White text sits on --ns-primary (the
+   visitor's messages, Send, and the chat form and settings buttons) and on --ns-accent
+   (Send while a turn is steered), so give both at least 4.5:1 contrast with white.
+   --ns-accent also underlines the chat header. */
+#agent-app {
+  --ns-font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --ns-bg: #ffffff;
+  --ns-fg: #1f2933;
+  --ns-primary: #b3001b;
+  --ns-accent: #146b3a;
+  --ns-border: #e5ded2;
+  --ns-panelbg: #ffffff;
+  --ns-msgbg: #f4efe6;
+  --ns-muted: #5b6774;
+}
+
+.assistant-panels {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 240px;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+/* Set the height once the runtime has mounted the chat, so a failed load leaves no
+   empty box. */
+#agent-app.ns-composed-app [data-ns-slot="chat"] { height: 720px; }
+/* The runtime gives the chat no background of its own. Keep --ns-msgbg different from
+   --ns-bg, or bot replies lose their bubble. */
+#agent-app .ns-chat { background: var(--ns-bg); }
+
+/* Site-wide form rules often stretch the runtime's own controls. Undo them here. */
+#agent-app input[type="checkbox"],
+#agent-app input[type="radio"] { width: auto; }
+#agent-app .ns-header { flex-wrap: wrap; }
+/* Site label rules add margins and bold text, and the inputs inside the labels inherit
+   the weight. */
+#agent-app .ns-settings-body label { margin: 4px 0; font-weight: 400; }
+/* Chat forms label radio groups with a legend, so site legend fonts would reach them. */
+#agent-app .ns-w-label { font-family: inherit; }
+/* Site label rules add margins to chat form fields and make their options bold. */
+#agent-app .ns-widget label { margin: 0; }
+#agent-app .ns-w-radio label,
+#agent-app .ns-w-multi label,
+#agent-app .ns-w-toggle { font-weight: 400; }
+/* The runtime sizes radio and multi-choice options but not the checkbox label. */
+#agent-app .ns-w-toggle { font-size: 13px; }
+/* The runtime spaces its buttons with gap. A site's button margin pushes Send below the input. */
+#agent-app button { margin: 0; }
+/* Chat choices are buttons with a light background. A site's button color can hide their
+   titles. */
+#agent-app .ns-w-choice { color: var(--ns-fg); }
+/* A site's button:hover background also reaches the runtime's plain buttons, behind
+   their dark text. Keep the runtime's own backgrounds. */
+#agent-app .ns-devtoggle:not(.on):hover,
+#agent-app .ns-modal-close:hover { background: transparent; }
+#agent-app .ns-w-choice:disabled:hover { background: #fafbfc; }
+/* The runtime's message rule hides the partner consent card's own background, and its
+   Decline label then has too little contrast. */
+#agent-app .ns-consent { background: #fffbeb; }
+/* While a consent card waits, the status line above it already says "Contacting", though
+   nothing has been sent. Hide it until the visitor answers. */
+#agent-app .ns-msgs:has(.ns-consent-actions) > .ns-turn-status { display: none; }
+/* Long links in a reply would run out of the bubble on a phone. "anywhere" would also
+   let the consent card's buttons shrink and split their labels. */
+#agent-app .ns-msg { overflow-wrap: break-word; }
+/* On a phone the consent card is too narrow for its three buttons in one row, and
+   "Always allow" breaks onto two lines. Keep each label whole and wrap the row. */
+#agent-app .ns-consent-actions { flex-wrap: wrap; }
+#agent-app .ns-consent-actions button { white-space: nowrap; }
+
+/* site.js and the runtime add their confirmation dialogs to <body>, outside #agent-app.
+   Site h2 rules reach the heading, and the two buttons touch. A right margin keeps
+   wrapped buttons lined up on the left. */
+body > dialog h2 { margin: 0 0 12px; font: 700 1.25em system-ui, sans-serif; }
+body > dialog button { margin-right: 8px; }
+/* site.js's dialog: the details in two columns, and a plain decline button, so the two
+   choices do not look the same. */
+.assistant-review { max-width: 640px; width: 85%; max-height: 85vh; overflow: auto; border: 1px solid #888; border-radius: 12px; padding: 24px; font: 16px system-ui, sans-serif; }
+.assistant-review dl { display: grid; grid-template-columns: fit-content(40%) 1fr; gap: 4px 16px; margin: 12px 0; }
+.assistant-review dt { font-weight: 600; }
+.assistant-review dd { margin: 0; overflow-wrap: anywhere; }
+.assistant-review details { margin: 12px 0; }
+.assistant-review pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+.assistant-review .assistant-decline { background: transparent; color: inherit; border: 1px solid currentColor; }
+
+@media (max-width: 760px) {
+  .assistant-panels { grid-template-columns: 1fr; }
+  /* On a phone, each detail goes under its label, so an email is not split. */
+  .assistant-review dl { grid-template-columns: 1fr; gap: 0; }
+  .assistant-review dd { margin-bottom: 8px; }
+}
