@@ -1,0 +1,10 @@
+{
+  "networks": [
+    {
+      "name": "north_pole_gift_co"
+    }
+  ],
+  "actions": {
+    "version": 1
+  }
+}
